@@ -87,12 +87,12 @@ function allList() {
         .then((elements) => {
             console.log(elements);
             elements.forEach(element => {
-                displayListCourses(element);
+                displayList(element);
             })
         })
 }
 
-function displayListCourses(element){
+function displayList(element){
     const listCourses = document.querySelector('.containerElement');
     const divElement = document.createElement('div');
     const paragraphName = document.createElement('p');
@@ -107,7 +107,6 @@ function displayListCourses(element){
     divElement.appendChild(paragrapheDescription);
 
     listCourses.appendChild(divElement);
-
 }
 
 async function addElement(name, description){
