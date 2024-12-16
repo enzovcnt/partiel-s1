@@ -15,6 +15,42 @@ const loginPage = document.querySelector('.login')
 const listPage = document.querySelector('.listeCourse')
 
 
+async function register() {
+    let registerParams = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: usernameRegister,
+            password: passwordRegister,
+        })
+    }
+
+    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/register', registerParams)
+        .then((response) =>  response.json())
+        .then((data) => {
+            console.log(data);
+            return data;
+        })
+}
+
+function registerForm(){
+    let usernameRegister = document.querySelector('.registerUsername')
+    let passwordRegister = document.querySelector('.registerPassword')
+    let registerButton = document.querySelector('.btnRegister')
+    registerButton.addEventListener('click', ()=>{
+
+        login(username.value = "enzo", password.value = "BlsgKQulSD")
+            .then((data) => {
+                token = data
+                displayListPage()
+                console.log(token)
+            })
+    })
+}
+
+
 async function login(username, password){
     console.log(username, password)
     let params = {
@@ -133,7 +169,7 @@ function displayList(data){
     paragraphName.classList.add('nameElement');
     paragraphDescription.innerHTML = data.description;
     btnStatus.innerHTML = data.status;
-    btnStatus.classList.add('btnStatus');
+    btnStatus.classList.add('btnStatus', 'btn', 'btn-primary');
 
     btnDelete.innerHTML = 'Supprimer'
     btnDelete.classList.add('btnDelete');
