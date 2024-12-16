@@ -34,7 +34,7 @@ async function login(username, password){
             console.log(data);
             return token = data.token;
         })
-}
+} //login
 
 function loginForm(){
     listPage.style.display = 'none'
@@ -57,12 +57,11 @@ function displayListPage(){
     loginPage.style.display = 'none'
     registerPage.style.display = 'none'
     listPage.style.display = 'block'
-    generalList()
-
+    allList()
 }
 
 
-async function generalList(){
+async function generalList(){ //liste générale
     let generalParams = {
         method: "GET",
         headers: {
@@ -79,6 +78,22 @@ async function generalList(){
             return data
         })
 }
+
+function allList(){
+    let p1 = document.querySelector('.elementName')
+    let p2 = document.querySelector('.elementDescription')
+    generalList()
+        .then((data) => {
+            console.log(data);
+            p1.innerHTML = data[0].name
+            p2.innerHTML = data[0].description
+            console.log(p2.innerHTML)
+            console.log(p1.innerHTML)
+        })
+}
+
+
+
 
 async function addElement(name, description){
     let addParams = {
@@ -98,7 +113,7 @@ async function addElement(name, description){
             console.log(data);
             return data;
         })
-}
+} //ajouter de nouveaux éléments
 
 function newElement(name, description){
     let inputName = document.querySelector('.nameInput');
@@ -122,13 +137,13 @@ async function changeStatus(){
             "Authorization": "Bearer " + token
         },
     }
-    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/switchstatus/88', changeParams)
+    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/switchstatus/117', changeParams)
         .then((response) =>  response.json())
         .then((data) => {
             console.log(data);
             return data;
         })
-}
+} //changer le statut
 
 function change(){
     let btnChange = document.querySelector('.changeBtn')
@@ -156,7 +171,7 @@ async function deleteElement(id){
             console.log(data);
             return data;
         })
-}
+} //effacer un élément
 
 function deleteOneElement(id){
     let btnDelete = document.querySelector('.deleteBtn')
@@ -184,7 +199,7 @@ async function clearAll(){
         console.log(data);
         return data;
     })
-}
+}  //effacer toute la liste
 
 function clearAllElements(){
     let btnClear = document.querySelector('.clearBtn')
