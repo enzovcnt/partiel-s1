@@ -170,6 +170,34 @@ function deleteOneElement(id){
 }
 deleteOneElement()
 
+async function clearAll(){
+    let clearParams = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+    }
+    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/clear', clearParams)
+    .then((response) =>  response.json())
+    .then((data) => {
+        console.log(data);
+        return data;
+    })
+}
+
+function clearAllElements(){
+    let btnClear = document.querySelector('.clearBtn')
+    btnClear.addEventListener('click', ()=>{
+        clearAll()
+            .then((data) => {
+                console.log(data);
+            })
+    })
+}
+clearAllElements()
+
+
 if(!token){
     loginForm()
 }else{
