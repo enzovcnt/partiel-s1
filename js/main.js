@@ -97,17 +97,24 @@ function displayList(element){
     const divElement = document.createElement('div');
     const paragraphName = document.createElement('p');
     const paragraphDescription = document.createElement('p');
+    const btnStatus = document.createElement('button');
 
     paragraphName.innerHTML = element.name;
     paragraphName.classList.add('nameElement');
     paragraphDescription.innerHTML = element.description;
+    btnStatus.innerHTML = element.status;
+    btnStatus.classList.add('btnStatus');
 
     divElement.classList.add('divElement');
     divElement.appendChild(paragraphName);
     divElement.appendChild(paragraphDescription);
+    divElement.appendChild(btnStatus);
 
     listCourses.appendChild(divElement);
+
 }
+
+
 
 async function addElement(name, description){
     let addParams = {
