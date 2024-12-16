@@ -98,12 +98,18 @@ function displayList(data){
     const paragraphName = document.createElement('p');
     const paragraphDescription = document.createElement('p');
     const btnStatus = document.createElement('button');
+    const btnDelete = document.createElement('button');
 
     paragraphName.innerHTML = data.name;
     paragraphName.classList.add('nameElement');
     paragraphDescription.innerHTML = data.description;
     btnStatus.innerHTML = data.status;
     btnStatus.classList.add('btnStatus');
+
+    btnDelete.innerHTML = 'Supprimer'
+    btnDelete.classList.add('btnDelete');
+    console.log(btnDelete);
+
 
     divElement.classList.add('divElement');
     divElement.appendChild(paragraphName);
@@ -112,14 +118,10 @@ function displayList(data){
 
     listCourses.appendChild(divElement);
 
+    clearAllElements()
+
 }
 
-function btnChangeStatus() {
-    let statusChange = document.querySelector('.btnStatus');
-    statusChange.addEventListener('click', ()=>{
-        changeStatus()
-    })
-}
 
 
 
@@ -165,7 +167,7 @@ function newElement(name, description){
 }
 newElement()
 
-async function changeStatus(){
+async function changeStatus(id){
     let changeParams = {
         method: "PATCH",
         headers: {
@@ -173,7 +175,7 @@ async function changeStatus(){
             "Authorization": "Bearer " + token
         },
     }
-    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/switchstatus/117', changeParams)
+    return await fetch(`https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/switchstatus/${id}`, changeParams)
         .then((response) =>  response.json())
         .then((data) => {
             console.log(data);
@@ -182,16 +184,22 @@ async function changeStatus(){
 } //changer le statut
 
 function change(){
-    let btnChange = document.querySelector('.changeBtn')
-    btnChange.addEventListener('click', ()=>{
+    let statusChange = document.querySelector('.btnStatus');
+    statusChange.addEventListener('click', ()=>{
 
         changeStatus()
             .then((data) => {
                 console.log(data);
+                if(data.status === true){
+                    statusChange.innerHTML = data.status;
+
+                }else{
+                    statusChange.innerHTML = data.status;
+                }
             })
     })
 }
-change();
+
 
 async function deleteElement(id){
     let deleteParams = {
@@ -201,7 +209,7 @@ async function deleteElement(id){
             "Authorization": "Bearer " + token
         },
     }
-    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/delete/88', deleteParams)
+    return await fetch(`https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/delete/${id}`, deleteParams)
         .then((response) =>  response.json())
         .then((data) => {
             console.log(data);
@@ -246,7 +254,7 @@ function clearAllElements(){
             })
     })
 }
-clearAllElements()
+
 
 
 if(!token){
