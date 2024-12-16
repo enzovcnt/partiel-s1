@@ -96,15 +96,15 @@ function displayList(element){
     const listCourses = document.querySelector('.containerElement');
     const divElement = document.createElement('div');
     const paragraphName = document.createElement('p');
-    const paragrapheDescription = document.createElement('p');
+    const paragraphDescription = document.createElement('p');
 
     paragraphName.innerHTML = element.name;
     paragraphName.classList.add('nameElement');
-    paragrapheDescription.innerHTML = element.description;
+    paragraphDescription.innerHTML = element.description;
 
     divElement.classList.add('divElement');
     divElement.appendChild(paragraphName);
-    divElement.appendChild(paragrapheDescription);
+    divElement.appendChild(paragraphDescription);
 
     listCourses.appendChild(divElement);
 }
