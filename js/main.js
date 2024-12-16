@@ -89,7 +89,7 @@ async function addElement(name, description){
         },
         body: JSON.stringify({
             name: name,
-            password: description,
+            description: description,
         })
     }
     return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/new', addParams)
@@ -113,6 +113,9 @@ function newElement(name, description){
     })
 }
 newElement()
+
+
+
 
 if(!token){
     loginForm()
