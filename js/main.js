@@ -34,7 +34,7 @@ async function login(username, password){
             console.log(data);
             return token = data.token;
         })
-} //login
+}
 
 function loginForm(){
     listPage.style.display = 'none'
@@ -58,7 +58,36 @@ function displayListPage(){
     registerPage.style.display = 'none'
     listPage.style.display = 'block'
     allList()
+    profilName()
 }
+
+async function profil(){
+    let profilParams = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        }
+    }
+
+    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/whoami', profilParams)
+        .then((response) =>  response.json())
+        .then((data) => {
+            console.log(data);
+            return data
+        })
+}
+
+function profilName(){
+    const profilName = document.querySelector('.nameProfil')
+    profil()
+        .then(data => {
+            profilName.innerHTML = data.username
+            })
+}
+
+
+
 
 
 async function generalList(){ //liste générale
