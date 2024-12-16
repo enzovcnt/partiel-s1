@@ -92,17 +92,17 @@ function allList() {
         })
 }
 
-function displayList(element){
+function displayList(data){
     const listCourses = document.querySelector('.containerElement');
     const divElement = document.createElement('div');
     const paragraphName = document.createElement('p');
     const paragraphDescription = document.createElement('p');
     const btnStatus = document.createElement('button');
 
-    paragraphName.innerHTML = element.name;
+    paragraphName.innerHTML = data.name;
     paragraphName.classList.add('nameElement');
-    paragraphDescription.innerHTML = element.description;
-    btnStatus.innerHTML = element.status;
+    paragraphDescription.innerHTML = data.description;
+    btnStatus.innerHTML = data.status;
     btnStatus.classList.add('btnStatus');
 
     divElement.classList.add('divElement');
@@ -112,6 +112,13 @@ function displayList(element){
 
     listCourses.appendChild(divElement);
 
+}
+
+function btnChangeStatus() {
+    let statusChange = document.querySelector('.btnStatus');
+    statusChange.addEventListener('click', ()=>{
+        changeStatus()
+    })
 }
 
 
