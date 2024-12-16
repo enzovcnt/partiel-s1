@@ -12,6 +12,8 @@
 let token = null
 const registerPage = document.querySelector('.register')
 const loginPage = document.querySelector('.login')
+const listPage = document.querySelector('.listeCourse')
+let element = []
 
 async function login(username, password){
     console.log(username, password)
@@ -35,7 +37,7 @@ async function login(username, password){
 }
 
 function loginForm(){
-
+    listPage.style.display = 'none'
     let username = document.querySelector('.loginUsername')
     let password = document.querySelector('.loginPassword')
     let loginButton = document.querySelector('.btnLogin')
@@ -43,9 +45,15 @@ function loginForm(){
 
         login(username.value, password.value).then((data) => {
             token = data
-            //displayChat()
+            displayList()
             console.log(token)
         })
     })
 }
 loginForm()
+
+function displayList(){
+    loginPage.style.display = 'none'
+    registerPage.style.display = 'none'
+    listPage.style.display = 'block'
+}
