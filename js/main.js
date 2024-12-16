@@ -99,10 +99,10 @@ function displayListCourses(element){
     const paragrapheDescription = document.createElement('p');
 
     paragraphName.innerHTML = element.name;
-    paragraphName.classList.add('nameItems');
+    paragraphName.classList.add('nameElement');
     paragrapheDescription.innerHTML = element.description;
 
-    divElement.classList.add('divItem');
+    divElement.classList.add('divElement');
     divElement.appendChild(paragraphName);
     divElement.appendChild(paragrapheDescription);
 
