@@ -141,6 +141,35 @@ function change(){
     })
 }
 change();
+
+async function deleteElement(id){
+    let deleteParams = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+    }
+    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/delete/88', deleteParams)
+        .then((response) =>  response.json())
+        .then((data) => {
+            console.log(data);
+            return data;
+        })
+}
+
+function deleteOneElement(id){
+    let btnDelete = document.querySelector('.deleteBtn')
+    btnDelete.addEventListener('click', ()=>{
+
+        deleteElement()
+            .then((data) => {
+                console.log(data);
+            })
+    })
+}
+deleteOneElement()
+
 if(!token){
     loginForm()
 }else{
