@@ -114,9 +114,33 @@ function newElement(name, description){
 }
 newElement()
 
+async function changeStatus(){
+    let changeParams = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+    }
+    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/switchstatus/88', changeParams)
+        .then((response) =>  response.json())
+        .then((data) => {
+            console.log(data);
+            return data;
+        })
+}
 
+function change(){
+    let btnChange = document.querySelector('.changeBtn')
+    btnChange.addEventListener('click', ()=>{
 
-
+        changeStatus()
+            .then((data) => {
+                console.log(data);
+            })
+    })
+}
+change();
 if(!token){
     loginForm()
 }else{
