@@ -13,7 +13,7 @@ let token = null
 const registerPage = document.querySelector('.register')
 const loginPage = document.querySelector('.login')
 const listPage = document.querySelector('.listeCourse')
-let element = []
+
 
 async function login(username, password){
     console.log(username, password)
@@ -23,16 +23,16 @@ async function login(username, password){
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            username: username,
-            password: password,
+            username: "enzo",
+            password: "BlsgKQulSD",
         })
     }
 
     return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/login', params)
         .then((response) =>  response.json())
-        .then((json) => {
-
-            return json.token
+        .then((data) => {
+            console.log(data);
+            return token = data.token;
         })
 }
 
@@ -43,17 +43,79 @@ function loginForm(){
     let loginButton = document.querySelector('.btnLogin')
     loginButton.addEventListener('click', ()=>{
 
-        login(username.value, password.value).then((data) => {
+        login(username.value = "enzo", password.value = "BlsgKQulSD")
+            .then((data) => {
             token = data
-            displayList()
+            displayListPage()
             console.log(token)
         })
     })
 }
-loginForm()
 
-function displayList(){
+
+function displayListPage(){
     loginPage.style.display = 'none'
     registerPage.style.display = 'none'
     listPage.style.display = 'block'
+    generalList()
+
+}
+
+
+async function generalList(){
+    let generalParams = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        }
+    }
+
+    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist', generalParams)
+        .then((response) =>  response.json())
+        .then((data) => {
+            console.log(data);
+            console.log(data[0].name);
+            return data
+        })
+}
+
+async function addElement(name, description){
+    let addParams = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({
+            name: name,
+            password: description,
+        })
+    }
+    return await fetch('https://partiel-s1-b1dev-2425.esdlyon.dev/api/mylist/new', addParams)
+        .then((response) =>  response.json())
+        .then((data) => {
+            console.log(data);
+            return data;
+        })
+}
+
+function newElement(name, description){
+    let inputName = document.querySelector('.nameInput');
+    let inputDes = document.querySelector('.descriptionInput');
+    let btnAdd = document.querySelector('.addBtn')
+    btnAdd.addEventListener('click', ()=>{
+
+        addElement(inputName.value, inputDes.value )
+            .then((data) => {
+                console.log(data);
+            })
+    })
+}
+newElement()
+
+if(!token){
+    loginForm()
+}else{
+    displayListPage()
 }
