@@ -79,21 +79,36 @@ async function generalList(){ //liste générale
         })
 }
 
-function allList(){
-    let p1 = document.querySelector('.elementName')
-    let p2 = document.querySelector('.elementDescription')
+function allList() {
+    const listContainer = document.querySelector('.containerElement');
+    listContainer.innerHTML = '';
+
     generalList()
-        .then((data) => {
-            console.log(data);
-            p1.innerHTML = data[0].name
-            p2.innerHTML = data[0].description
-            console.log(p2.innerHTML)
-            console.log(p1.innerHTML)
+        .then((elements) => {
+            console.log(elements);
+            elements.forEach(element => {
+                displayListCourses(element);
+            })
         })
 }
 
+function displayListCourses(element){
+    const listCourses = document.querySelector('.containerElement');
+    const divElement = document.createElement('div');
+    const paragraphName = document.createElement('p');
+    const paragrapheDescription = document.createElement('p');
 
+    paragraphName.innerHTML = element.name;
+    paragraphName.classList.add('nameItems');
+    paragrapheDescription.innerHTML = element.description;
 
+    divElement.classList.add('divItem');
+    divElement.appendChild(paragraphName);
+    divElement.appendChild(paragrapheDescription);
+
+    listCourses.appendChild(divElement);
+
+}
 
 async function addElement(name, description){
     let addParams = {
@@ -215,6 +230,6 @@ clearAllElements()
 
 if(!token){
     loginForm()
-}else{
+}else {
     displayListPage()
 }
