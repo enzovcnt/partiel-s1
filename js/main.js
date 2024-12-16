@@ -129,6 +129,14 @@ async function addElement(name, description){
         })
 } //ajouter de nouveaux éléments
 
+function refresh(){
+    const btnRefresh = document.querySelector('.refreshBtn');
+    btnRefresh.addEventListener('click', ()=>{
+        allList();
+    })
+}
+refresh();
+
 function newElement(name, description){
     let inputName = document.querySelector('.nameInput');
     let inputDes = document.querySelector('.descriptionInput');

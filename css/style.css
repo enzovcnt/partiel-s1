@@ -10,3 +10,8 @@
     padding: 10px;
     border-radius: 20px;
 }
+.divElement{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 5px;
+}
